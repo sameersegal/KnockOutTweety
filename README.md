@@ -3,6 +3,8 @@ KnockOutTweety
 
 Demo showing Knockout.js with Twitter &amp; Maps API using Play! Framework
 
+## screenshot
+
 #Requirements:
  - Play! Framework 1.2.4 (www.playframework.org)
 
@@ -12,3 +14,7 @@ Demo showing Knockout.js with Twitter &amp; Maps API using Play! Framework
  - play test
 
 Made for MetaRefresh (Bangalore) April 2012
+
+## Slides
+
+## Pictures
