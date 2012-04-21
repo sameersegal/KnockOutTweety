@@ -120,6 +120,7 @@
  <script type="text/javascript">
 	var tweets;
 	var feedSocket;
+	var socketUrl;
 	
 	function Tweets() {
 		// data
@@ -214,7 +215,7 @@
     	var password = $("form#login input[name='password']").val();
     	
     	// Connect to the socket and extract a reference
-    	feedSocket = connect(username, password, onConnect, addTweet, onDisconnect);
+    	feedSocket = connect(socketUrl,username, password, onConnect, addTweet, onDisconnect);
     }
     
     // If the user wants to disconnect, close the connection

@@ -1,7 +1,10 @@
 var n = 0;
 var socket = null;
-function connect(username, password, onConnect, onMessage, onDisconnect) {
-	socket = new WebSocket("ws://localhost:9000/feed?username=" + username + "&password="+password);
+function connect(socketUrl, username, password, onConnect, onMessage, onDisconnect) {
+	if(socketUrl == null){
+		socketUrl = "ws://localhost:9000/feed";
+	}
+	socket = new WebSocket(socketUrl + "?username=" + username + "&password="+password);
 	
 	socket.onopen = function(event) {
 		onConnect(event);
