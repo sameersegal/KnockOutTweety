@@ -1,21 +1,20 @@
 var n = 0;
 var socket = null;
-function connect(callback) {
-	socket = new WebSocket("ws://localhost:9000/feed");
+function connect(username, password, onConnect, onMessage, onDisconnect) {
+	socket = new WebSocket("ws://localhost:9000/feed?username=" + username + "&password="+password);
+	
+	socket.onopen = function(event) {
+		onConnect(event);
+	}
 
 	socket.onmessage = function(event) {
-		//var json = eval('(' + event.data + ')');
-		//if (json["geo"] != null) {
-		//	$("div#messages").prepend(
-		//			'<br /><span class="badge badge-info">' + ++n
-		//					+ '</span><br />' + json["created_at"] + " : "
-		//					+ json["text"] + '<br /><hr />');
-		//}
-		callback(eval('(' + event.data + ')'));
+		onMessage(eval('(' + event.data + ')'));
 	}
 
 	socket.onclose = function(event) {
 		socket = null;
-		// connect();
+		onDisconnect(event);
 	}
+
+	return socket;
 }

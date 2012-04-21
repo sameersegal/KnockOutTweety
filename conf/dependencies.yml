@@ -2,3 +2,4 @@
 
 require:
     - play
+    - org.apache.httpcomponents -> httpclient 4.1.3
