@@ -1,46 +1,48 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Knockouttweety by sameersegal</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/main.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>KnockOutTweety</title>
-  </head>
-  <body>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<title>Knockouttweety by sameersegal</title>
+<link rel="stylesheet" href="stylesheets/styles.css">
+<link rel="stylesheet" href="stylesheets/pygment_trac.css">
+<link rel="stylesheet" href="http://yandex.st/highlightjs/6.2/styles/default.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://yandex.st/highlightjs/6.2/highlight.min.js"></script>
+<script src="javascripts/main.js"></script>
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>KnockOutTweety</title>
+</head>
+<body>
 
-      <header>
-        <h1>KnockOutTweety</h1>
-        <p>Demo showing Knockout.js with Twitter &amp; Maps API using Play! Framework</p>
-      </header>
+<header>
+<h1>KnockOutTweety</h1>
+<p>Demo showing Knockout.js with Twitter &amp; Maps API using Play! Framework</p>
+</header>
 
-      <div id="banner">
-        <span id="logo"></span>
+<div id="banner">
+<span id="logo"></span>
 
-        <a href="https://github.com/sameersegal/KnockOutTweety" class="button fork"><strong>Fork On GitHub</strong></a>
-        <div class="downloads">
-          <span>Downloads:</span>
-          <ul>
-            <li><a href="https://github.com/sameersegal/KnockOutTweety/zipball/master" class="button">ZIP</a></li>
-            <li><a href="https://github.com/sameersegal/KnockOutTweety/tarball/master" class="button">TAR</a></li>
-          </ul>
-        </div>
+<a href="https://github.com/sameersegal/KnockOutTweety" class="button fork"><strong>Fork On GitHub</strong></a>
+<div class="downloads">
+<span>Downloads:</span>
+<ul>
+<li><a href="https://github.com/sameersegal/KnockOutTweety/zipball/master" class="button">ZIP</a></li>
+<li><a href="https://github.com/sameersegal/KnockOutTweety/tarball/master" class="button">TAR</a></li>
+</ul>
+</div>
 
-      </div><!-- end banner -->
+</div><!-- end banner -->
 
-    <div class="wrapper">
-      <nav>
-        <ul></ul>
-      </nav>
-      <section>
-        <h3>Introduction</h3>
+<div class="wrapper">
+<nav>
+<ul></ul>
+</nav>
+<section>
+<h3>Introduction</h3>
 
 <p>Knockout.js is an extremely powerful and lightweight js framework that can be used along with jquery to make rich UI with few lines of code</p>
 
@@ -49,34 +51,201 @@
 <p>KnockOutTweety is a quick example showing the powerful features of Knockout.js using Twitter Streaming API & Google Maps API v3. Here is a quick screen shot of what we are going to build</p>
 
 
-<pre><code>$ cd KnockOutTweety
+<pre><code class="bash">$ mv <downloaded-package> KnockOutTweety
+$ cd KnockOutTweety
 $ cd public/standalone
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
 <h3>KnockOut.js</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>Documentation: <a href="http://www.knockoutjs.com">Knockoutjs.com</a><br />
+It is designed to keep your UI and data (Model) in sync. It is a View-Model-ViewModel pattern unlike Backbone.js's Model View Controller architecture.
 
-<h3>Twitter Streaming API to WebSockets</h3>
+<blockquote>
+Knockout is a JavaScript library that helps you to create rich, responsive display and editor user interfaces with a clean underlying data model. Any time you have sections of UI that update dynamically (e.g., changing depending on the user’s actions or when an external data source changes), KO can help you implement it more simply and maintainably.
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+Headline features:
+<ul>
+<li>Elegant dependency tracking - automatically updates the right parts of your UI whenever your data model changes.</li>
+<li>Declarative bindings - a simple and obvious way to connect parts of your UI to your data model. You can construct a complex dynamic UIs easily using arbitrarily nested binding contexts.</li>
+<li>Trivially extensible - implement custom behaviors as new declarative bindings for easy reuse in just a few lines of code.</li>
+</ul>
 
-<h3>Authors and Contributors</h3>
+Additional benefits:
+<ul>
+<li>Can be added on top of your existing web application without requiring major architectural changes
+<li>Compact - around 13kb after gzipping</li>
+<li>Works on any mainstream browser (IE 6+, Firefox 2+, Chrome, Safari, others)</li>
+</ul>
+</blockquote>
+</p>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+Lets jump to the documentation and take a look at a few examples: <a href="http://knockoutjs.com/documentation/introduction.html">http://knockoutjs.com/documentation/introduction.html"</a>. Did you look at text, visible, foreach, observables -- is it impressive?
 
-<h3>Support or Contact</h3>
+<br />
+<h3>Code</h3>
 
-<p>Feel free to drop a note to <a href="https://github.com/sameersegal" class="user-mention">@sameersegal</a></p>
-      </section>
-      <footer>
-        <p>Project maintained by <a href="https://github.com/sameersegal">sameersegal</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
-      </footer>
+Lets start with making the ViewModel. We need <code>list</code> of tweets and a <code>status</code> to run our UI. This is how we can define it
+
+<pre><code class="javascript">
+function Tweets() {
+  // data
+  var self = this;
+  // list of tweets; the UI constantly updates itself as the content of the list changes
+  self.list = ko.observableArray();
+  // status of our connection to the backend
+  self.status = ko.observable(false);
+
+  </pre></code>
+
+    Now lets see how a simple tweet looks like by typing the following in your browser:
+
+    <pre><code>stream.twitter.com/1/statuses/sample.json?delimited=length</code></pre>
+
+    Lets build our basic html page:
+
+    <pre class="xml">
+    <xmp>
+    <div class="container-fluid">
+    <div class="row-fluid">
+    <!-- Box to place our map -->
+    <div id="map-container" class="span8" style="height: 600px;">
+    <div id="map-canvas" style="width: 500px; height: 400px;"></div>
+    </div>
+    <!-- An empty space -->
+    <div class="span1">
+    </div>
+    <!-- Box to display our list of tweets -->
+    <div class="span4" style="height: 600px">
+    <div class="well">
+    <!-- Display the login form only when connection status is false -->
+    <form id="login" class="form-inline" data-bind="visible: !status()">
+    <input type="text" name="username" class="input-small" placeholder="Username">
+    <input type="password" name="password" class="input-small" placeholder="Password">       
+    <button class="btn btn-primary" onclick="firehose(event)">Connect</button>
+    </form>
+    <!-- Display the following block when the connection status is true -->
+    <div data-bind="visible: status()">
+    <button type="submit" class="btn btn-danger" data-bind="visible: status()" onclick="disconnect()">Disconnect</button>
+    <!-- Left for future enhancement
+    <hr />
+    <input type="text" name="tags" class="span3"  placeholder="Tags"> 
+    -->
+    </div>
+    <hr />
+    <!-- Tweet list -->
+    <div id="messages" style="overflow-y: no; height: 100%;">
+    <!-- 
+    This is a single line to display a tweet; we are using foreach and templates.
+    We place a marker on the map once we are finished rendering the tweet 
+    -->
+    <div data-bind="template: {name: 'tweet', foreach:list, afterRender: addMarker}">
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div> 
+    </xmp>
+    </pre>
+
+    Now, lets draw a single tweet:
+    <xmp clas="xml">
+    <!-- html template for drawing tweets -->
+    <script type="text/html" id="tweet">
+    <!-- In case it contains no geo location, place it in a blue box-->
+    <span class="badge badge-info" data-bind="visible: $data.geo == null, text: $root.list.indexOf($data) + 1"></span>
+    <!-- In case it contains geo location, place it in a green box-->
+    <img data-bind="attr: {src: $data.user.profile_image_url}" width="50px"/><p data-bind="text: $data.user.screen_name"></p>
+    <span class="badge badge-success" data-bind="visible: !($data.geo == null), text: $root.list.indexOf($data) + 1, click: $root.panTo"></span>
+    <!-- tweet -->
+    <p data-bind="text: text"></p>
+    <!-- delete this tweet and remove the marker -->
+    <p data-bind="click: $parent.removeMarker">delete</p>
+    </script>
+    </xmp>
+
+    <h3>Twitter Streaming API to WebSockets</h3>
+
+    <p>Twitter provides a streaming api which unfortunately cannot be directly consumed by plain javascript or ajax. However, you can use anything from node.js to Java Server. We are going to Play! Framework (<a href="http://www.playframework.org">www.playframework.org</a>) and its excellent support for websockets. Here is a quick example: </p>
+
+    <pre><code class="java">
+    // Post request. We ask Twitter to provide us a stream of tweets
+    // delimited by the length
+    HttpPost postreq = new HttpPost(
+        "https://stream.twitter.com/1/statuses/filter.json?delimited=length");
+
+  // Post parameters
+  List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
+      1);
+  // Bay Area region coordinates -- SW & NE for the bounding box
+  nameValuePairs.add(new BasicNameValuePair("locations",
+        "-122.75,36.8,-121.75,37.8"));
+  postreq.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+  // Making a call to twitter
+  org.apache.http.HttpResponse stream = httpclient
+    .execute(postreq);
+
+  // Since this is streaming api, we continuously get a response
+  // from twitter and need to process it chuck by chuck
+  InputStream is = stream.getEntity().getContent();
+
+
+  ...
+
+
+    // To process chunk by chunk, extract the length first by reading initial bytes
+    // And then read the tweet
+    while (readLine(is, b, 0, b.length) > 0) {
+      String count = new String(b).trim();
+
+      // In case twitter sends us a new line feed 
+      // to keep the connection open 
+      if("".equals(count)){
+        continue;
+      }
+
+      // Reading the next <count> bytes to extract the tweet
+      byte[] buffer = new byte[Integer.parseInt(count)];
+      is.read(buffer);
+
+      // Store as string
+      String tweet = new String(buffer);
+
+      // If the socket is still open, send the tweet to the browser
+      if (inbound.isOpen()) {
+        outbound.send(tweet);
+      } else {
+        disconnect();
+        return;
+      }
+
+      // re-init b to avoid strange results
+      b = new byte[10];
+    }
+  </code></pre>
+
+    <h3>Authors and Contributors</h3>
+
+    <p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+
+    <h3>Support or Contact</h3>
+
+    <p>Feel free to drop a note to <a href="https://github.com/sameersegal" class="user-mention">@sameersegal</a></p>
+    </section>
+    <footer>
+    <p>Project maintained by <a href="https://github.com/sameersegal">sameersegal</a></p>
+    <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
+    </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
-    
-  </body>
-</html>
+
+    <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+    </body>
+    </html>
+
+

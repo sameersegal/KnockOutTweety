@@ -581,6 +581,7 @@ blockquote {
   font-style: italic;
 }
 
+/*
 code {
   font-family: "Lucida Sans", Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
   font-size: 13px;
@@ -596,6 +597,7 @@ code {
   -khtml-border-radius: 2px;
   border-radius: 2px;
 }
+
 
 pre {
   padding: 8px 15px;
@@ -614,6 +616,8 @@ pre code {
   margin: 0px;
   padding: 0px;
 }
+
+*/
 
 table {
   width: 100%;
