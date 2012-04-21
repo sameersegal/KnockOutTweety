@@ -1,8 +1,16 @@
-*{ Inherits 'main.html' template }*
-#{extends 'main.html' /}
-#{set title:'KnockOutTweety' /}
+<!DOCTYPE html>
 
-#{set 'moreScripts'}
+<html>
+    <head>
+        <title>KnockOutTweety</title>
+        <meta charset="utf8">  
+        <link rel="stylesheet" media="screen" href="../stylesheets/main.css">                
+        <link rel="stylesheet" media="screen" href="../stylesheets/bootstrap.min.css" />
+		<link rel="stylesheet" media="screen" href="../stylesheets/bootstrap-responsive.min.css" />
+	
+        <link rel="shortcut icon" type="image/png" href="../images/favicon.png'}">
+        <script src="..//javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="utf8"></script>
+
 	<!-- templating.js needs to be placed above knockout.js if you want templating.js to handle the template processing -->
 	#{script 'templating.js' /}
 	
@@ -30,6 +38,8 @@
     </script> 
 #{/set}
 
+  </head>
+  <body>
 <!-- Top Navigation menu; check http://twitter.github.com/bootstrap/ -->
 <div class="navbar">
   <div class="navbar-inner">
@@ -63,7 +73,7 @@
   		</div>
   		<!-- Box to display our list of tweets -->
   		<div class="span4" style="height: 600px">
-  			<div class="well"style="height:500px;overflow-y:scroll;">
+  			<div class="well">
   				<!-- Display the login form only when connection status is false -->
   				<form id="login" class="form-inline" data-bind="visible: !status()">
  					<input type="text" name="username" class="input-small" placeholder="Username">
@@ -95,26 +105,15 @@
 
 <!-- html template for drawing tweets -->
 <script type="text/html" id="tweet">
-<div style="width:100%; height:120px; margin: 5px 5px">
-	<div style="float:left; width: 30%; display:inline-block">
-		<!-- In case it contains no geo location, place it in a blue box-->
-		<span style="float:left" class="badge badge-info" data-bind="visible: $data.geo == null, text: $root.list.indexOf($data) + 1"></span>
-		<!-- In case it contains geo location, place it in a green box-->
-		<span style="float:left" class="badge badge-success" data-bind="visible: !($data.geo == null), text: $root.list.indexOf($data) + 1, click: $root.panTo"></span>
-	
-		<div style="float:left; margin-left:5px">
-			<img data-bind="attr: {src: $data.user.profile_image_url}" width="50px"/>
-			<p style="clear:both"data-bind="text: $data.user.screen_name"></p>
-		</div>
-	</div>
-	
-	<div style="float:left; display:inline-block; width: 60%; margin-left:5px">
-		<!-- tweet -->
-		<p style="float:left" data-bind="text: text"></p>
-		<!-- delete this tweet and remove the marker -->
-		<p style="float:right" data-bind="click: $parent.removeMarker">x</p>
-	</div>
-</div>
+	<!-- In case it contains no geo location, place it in a blue box-->
+	<span class="badge badge-info" data-bind="visible: $data.geo == null, text: $root.list.indexOf($data) + 1"></span>
+	<!-- In case it contains geo location, place it in a green box-->
+	<img data-bind="attr: {src: $data.user.profile_image_url}" width="50px"/><p data-bind="text: $data.user.screen_name"></p>
+	<span class="badge badge-success" data-bind="visible: !($data.geo == null), text: $root.list.indexOf($data) + 1, click: $root.panTo"></span>
+	<!-- tweet -->
+	<p data-bind="text: text"></p>
+	<!-- delete this tweet and remove the marker -->
+	<p data-bind="click: $parent.removeMarker">delete</p>
 </script>
 
  <script type="text/javascript">
@@ -231,3 +230,5 @@
 		$("#map-canvas").css("height",mapcontainer.height() + "px");
     });
 </script>
+</body>
+</html>
