@@ -2,7 +2,7 @@ var n = 0;
 var socket = null;
 function connect(socketUrl, username, password, onConnect, onMessage, onDisconnect) {
 	if(socketUrl == null){
-		socketUrl = "ws://localhost:9000/feed";
+		socketUrl = "ws://kot.artoo.in/feed";
 	}
 	socket = new WebSocket(socketUrl + "?username=" + username + "&password="+password);
 	

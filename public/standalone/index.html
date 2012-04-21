@@ -3,244 +3,235 @@
 <html>
     <head>
         <title>KnockOutTweety</title>
-        <meta charset="utf8">
-        <link rel="stylesheet" media="screen" href="../stylesheets/main.css">
-		<link rel="stylesheet" media="screen" href="../stylesheets/bootstrap.min.css">
-		<link rel="stylesheet" media="screen" href="../stylesheets/bootstrap-responsive.min.css" >
+        <meta charset="${_response_encoding}">  
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">                
+        #{stylesheet 'bootstrap.min.css' /}
+	#{stylesheet 'bootstrap-responsive.min.css' /}
+	
+  	#{get 'moreStyles' /}
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        #{get 'moreScripts' /}    
+  </head>
+  <body>
 
-        <link rel="shortcut icon" type="image/png" href="../images/favicon.png">
-        
-        <script src="../javascripts/jquery-1.6.4.min.js" type="text/javascript" charset="utf8"></script>
-        
-		<!-- templating.js needs to be placed above knockout.js if you want templating.js to handle the template processing -->
-		<script src="../javascripts/templating.js"></script>
-		
-		<!-- its best to use debug version for development -->
-		<script src="../javascripts/knockout-2.0.0.debug.js" /></script>
-		<script src="../javascripts/knockout.mapping-latest.js" /></script> 
-		
-		<!-- script to handle websocket connection -->
-		<script src="../javascripts/tweet_socket_connector.js"></script>
-		
-		<!-- basic code to include a Google map, http://code.google.com/apis/ajax/playground/#map_simple_v3 -->
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
-		<script type="text/javascript">
-		  var map;
-	      function initialize() {
-	        var mapDiv = document.getElementById('map-canvas');
-	          map = new google.maps.Map(mapDiv, {
-	         	 center: new google.maps.LatLng(37.4419, -122.1419),
-	        	  zoom: 7,
-	     	     mapTypeId: google.maps.MapTypeId.ROADMAP
-	        });
-	      }
-	      
-	      google.maps.event.addDomListener(window, 'load', initialize);
-	    </script> 
-    </head>
-    <body>
-		<!-- Top Navigation menu; check http://twitter.github.com/bootstrap/ -->
-		<div class="navbar">
-		  <div class="navbar-inner">
-		    <div class="container">
-		        <a class="brand" href="#">
-		  			KnockOutTweety
-			    </a>
-			    <ul class="nav pull-right">
-		  			<li>
-		    			<a href="#">Created by Artoo</a>
-		  			</li>
-		  			<li class="divider-vertical"></li>
-		  			<li>
-		  				<a href="#">www.artoo.in</a>
-		  			</li>
-				</ul>
-		    </div>
-		  </div>
-		</div>
-		
-		<br/ >
-		
-			<div class="container-fluid">
-			<div class="row-fluid">
-				<!-- Box to place our map -->
-		  		<div id="map-container" class="span8" style="height: 600px;">
-		  			<div id="map-canvas" style="width: 500px; height: 400px;"></div>
-		  		</div>
-		  		<!-- An empty space -->
-		  		<div class="span1">
-		  		</div>
-		  		<!-- Box to display our list of tweets -->
-		  		<div class="span4" style="height: 600px">
-		  			<div class="well"style="height:500px;overflow-y:scroll;">
-		  				<!-- Display the login form only when connection status is false -->
-		  				<form id="login" class="form-inline" data-bind="visible: !status()">
-		 					<input type="text" name="username" class="input-small" placeholder="Username">
-		  					<input type="password" name="password" class="input-small" placeholder="Password">  					
-		  					<button class="btn btn-primary" onclick="firehose(event)">Connect</button>
-						</form>
-						<!-- Display the following block when the connection status is true -->
-						<div data-bind="visible: status()">
-							<button type="submit" class="btn btn-danger" data-bind="visible: status()" onclick="disconnect()">Disconnect</button>
-							<!-- Left for future enhancement
-								<hr />
-								<input type="text" name="tags" class="span3"  placeholder="Tags"> 
-							-->
-						</div>
+#{set 'moreScripts'}
+	<!-- templating.js needs to be placed above knockout.js if you want templating.js to handle the template processing -->
+	#{script 'templating.js' /}
+	
+	<!-- its best to use debug version for development -->
+	#{script 'knockout-2.0.0.debug.js' /}
+	#{script 'knockout.mapping-latest.js' /} 
+	
+	<!-- script to handle websocket connection -->
+	#{script 'tweet_socket_connector.js' /}
+	
+	<!-- basic code to include a Google map, http://code.google.com/apis/ajax/playground/#map_simple_v3 -->
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+	<script type="text/javascript">
+	  var map;
+      function initialize() {
+        var mapDiv = document.getElementById('map-canvas');
+          map = new google.maps.Map(mapDiv, {
+         	 center: new google.maps.LatLng(37.4419, -122.1419),
+        	  zoom: 7,
+     	     mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+      }
+      
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script> 
+#{/set}
+
+<!-- Top Navigation menu; check http://twitter.github.com/bootstrap/ -->
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+        <a class="brand" href="#">
+  			KnockOutTweety
+	    </a>
+	    <ul class="nav pull-right">
+  			<li>
+    			<a href="#">Created by Artoo</a>
+  			</li>
+  			<li class="divider-vertical"></li>
+  			<li>
+  				<a href="#">www.artoo.in</a>
+  			</li>
+		</ul>
+    </div>
+  </div>
+</div>
+
+<br/ >
+
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- Box to place our map -->
+  		<div id="map-container" class="span8" style="height: 600px;">
+  			<div id="map-canvas" style="width: 500px; height: 400px;"></div>
+  		</div>
+  		<!-- An empty space -->
+  		<div class="span1">
+  		</div>
+  		<!-- Box to display our list of tweets -->
+  		<div class="span4" style="height: 600px">
+  			<div class="well">
+  				<!-- Display the login form only when connection status is false -->
+  				<form id="login" class="form-inline" data-bind="visible: !status()">
+ 					<input type="text" name="username" class="input-small" placeholder="Username">
+  					<input type="password" name="password" class="input-small" placeholder="Password">  					
+  					<button class="btn btn-primary" onclick="firehose(event)">Connect</button>
+				</form>
+				<!-- Display the following block when the connection status is true -->
+				<div data-bind="visible: status()">
+					<button type="submit" class="btn btn-danger" data-bind="visible: status()" onclick="disconnect()">Disconnect</button>
+					<!-- Left for future enhancement
 						<hr />
-						<!-- Tweet list -->
-		  				<div id="messages" style="overflow-y: no; height: 100%;">
-		  					<!-- 
-		  						This is a single line to display a tweet; we are using foreach and templates.
-		  						We place a marker on the map once we are finished rendering the tweet 
-		  					 -->
-		  					<div data-bind="template: {name: 'tweet', foreach:list, afterRender: addMarker}">
-		  					</div>
-		  				</div>
-		  			</div>
-		  		</div>
-			</div>
-		</div>
-				
-		<!-- html template for drawing tweets -->
-		<script type="text/html" id="tweet">
-		<div style="width:100%; height:120px; margin: 5px 5px">
-			<div style="float:left; width: 30%; display:inline-block">
-				<!-- In case it contains no geo location, place it in a blue box-->
-				<span style="float:left" class="badge badge-info" data-bind="visible: $data.geo == null, text: $root.list.indexOf($data) + 1"></span>
-				<!-- In case it contains geo location, place it in a green box-->
-				<span style="float:left" class="badge badge-success" data-bind="visible: !($data.geo == null), text: $root.list.indexOf($data) + 1, click: $root.panTo"></span>
-			
-				<div style="float:left; margin-left:5px">
-					<img data-bind="attr: {src: $data.user.profile_image_url}" width="50px"/>
-					<p style="clear:both"data-bind="text: $data.user.screen_name"></p>
+						<input type="text" name="tags" class="span3"  placeholder="Tags"> 
+					-->
 				</div>
-			</div>
-			
-			<div style="float:left; display:inline-block; width: 60%; margin-left:5px">
-				<!-- tweet -->
-				<p style="float:left" data-bind="text: text"></p>
-				<!-- delete this tweet and remove the marker -->
-				<p style="float:right" data-bind="click: $parent.removeMarker">x</p>
-			</div>
-		</div>
-		</script>
+				<hr />
+				<!-- Tweet list -->
+  				<div id="messages" style="overflow-y: no; height: 100%;">
+  					<!-- 
+  						This is a single line to display a tweet; we are using foreach and templates.
+  						We place a marker on the map once we are finished rendering the tweet 
+  					 -->
+  					<div data-bind="template: {name: 'tweet', foreach:list, afterRender: addMarker}">
+  					</div>
+  				</div>
+  			</div>
+  		</div>
+	</div>
+</div>
 
+<!-- html template for drawing tweets -->
+<script type="text/html" id="tweet">
+	<!-- In case it contains no geo location, place it in a blue box-->
+	<span class="badge badge-info" data-bind="visible: $data.geo == null, text: $root.list.indexOf($data) + 1"></span>
+	<!-- In case it contains geo location, place it in a green box-->
+	<img data-bind="attr: {src: $data.user.profile_image_url}" width="50px"/><p data-bind="text: $data.user.screen_name"></p>
+	<span class="badge badge-success" data-bind="visible: !($data.geo == null), text: $root.list.indexOf($data) + 1, click: $root.panTo"></span>
+	<!-- tweet -->
+	<p data-bind="text: text"></p>
+	<!-- delete this tweet and remove the marker -->
+	<p data-bind="click: $parent.removeMarker">delete</p>
+</script>
+
+ <script type="text/javascript">
+	var tweets;
+	var feedSocket;
+	
+	function Tweets() {
+		// data
+		var self = this;
+		// list of tweets; the UI constantly updates itself as the content of the list changes
+		self.list = ko.observableArray();
+		// status of our connection to the backend
+		self.status = ko.observable(false);
+
+		// behavior
 		
-		 <script type="text/javascript">
-			var tweets;
-			var feedSocket;
-			var socketUrl = "ws://46.137.240.16/feed";
+		// Add a marker on the map
+		self.addMarker = function(elements, data) {
 			
-			function Tweets() {
-				// data
-				var self = this;
-				// list of tweets; the UI constantly updates itself as the content of the list changes
-				self.list = ko.observableArray();
-				// status of our connection to the backend
-				self.status = ko.observable(false);
+			// if the tweet doesn't contain any geo coordinates, skip the rest
+			if(data["geo"] == null || data["marker"])
+				return;
+			
+			// extract latitude & longitude	
+			var coords = data["geo"]["coordinates"];
+    		var latLng = new google.maps.LatLng(coords[0],coords[1]);
+    		
+    		// create a marker 
+    		var marker = new google.maps.Marker({
+      			position: latLng,
+      			map: map,
+    		});
+    		
+    		// store the marker as data
+    		data["marker"] = marker;
+    	}
+    	
+    	// Removes a marker
+    	self.removeMarker = function(data,event) {
+			
+			// Is there a marker for this tweet
+			if(data["marker"] != null) {
+			
+	  			var marker = data["marker"];
+	  			
+	  			// removing the marker by unsetting its map property
+				marker.setMap(null);
+				// updating data
+				data["marker"] = null;
+			
+			}
 		
-				// behavior
-				
-				// Add a marker on the map
-				self.addMarker = function(elements, data) {
-					
-					// if the tweet doesn't contain any geo coordinates, skip the rest
-					if(data["geo"] == null || data["marker"])
-						return;
-					
-					// extract latitude & longitude	
-					var coords = data["geo"]["coordinates"];
-		    		var latLng = new google.maps.LatLng(coords[0],coords[1]);
-		    		
-		    		// create a marker 
-		    		var marker = new google.maps.Marker({
-		      			position: latLng,
-		      			map: map,
-		    		});
-		    		
-		    		// store the marker as data
-		    		data["marker"] = marker;
-		    	}
-		    	
-		    	// Removes a marker
-		    	self.removeMarker = function(data,event) {
-					
-					// Is there a marker for this tweet
-					if(data["marker"] != null) {
-					
-			  			var marker = data["marker"];
-			  			
-			  			// removing the marker by unsetting its map property
-						marker.setMap(null);
-						// updating data
-						data["marker"] = null;
-					
-					}
-				
-					// removing the tweet from the list
-					tweets.list.remove(this);
-		    	}
-		    	
-		    	// Pan to the tweet
-		    	self.panTo = function(data) {
-		    	
-		    		// Contains a marker
-		    		if(data["marker"] != null){
-		    			// move to the location of the marker
-		    			map.panTo(data["marker"].getPosition());
-		    		}
-		    	}
-		    	
-		    	// setup
-			}	
-			
-			// tweets is our viewmodel and knockout needs to constantly reflect its state
-			ko.applyBindings(tweets = new Tweets());
-			
-			// Add a tweet
-			function addTweet(json){
-				  // We a push a tweet onto the list
-		    	  tweets.list.push(json);
-		    }
-		    
-		    // When connected set the status to true
-		    function onConnect(event) {
-		    	tweets.status(true);
-		    }
-		    
-		    // When disconnected set the status to false
-		    function onDisconnect(event) {
-		    	tweets.status(false);
-		    }
-		    
-		    // Connect to the firehose
-		    function firehose(event) {
-		    
-		    	// We don't want the form to be posted
-		    	event.preventDefault();
-		    	
-		    	// Extract credentials
-		    	var username = $("form#login input[name='username']").val();
-		    	var password = $("form#login input[name='password']").val();
-		    	
-		    	// Connect to the socket and extract a reference
-		    	feedSocket = connect(socketUrl,username, password, onConnect, addTweet, onDisconnect);
-		    }
-		    
-		    // If the user wants to disconnect, close the connection
-		    function disconnect(){
-		    	if(feedSocket != null) {
-		    		feedSocket.close();
-		    	}
-		    }
-		    
-		    // On load function adjust the height/width property of a ap
-		    $(function() {
-				var mapcontainer = $("#map-container");
-				$("#map-canvas").css("width",mapcontainer.width() + "px");
-				$("#map-canvas").css("height",mapcontainer.height() + "px");
-		    });
-		</script>
-	</body>
-</head>
+			// removing the tweet from the list
+			tweets.list.remove(this);
+    	}
+    	
+    	// Pan to the tweet
+    	self.panTo = function(data) {
+    	
+    		// Contains a marker
+    		if(data["marker"] != null){
+    			// move to the location of the marker
+    			map.panTo(data["marker"].getPosition());
+    		}
+    	}
+    	
+    	// setup
+	}	
+	
+	// tweets is our viewmodel and knockout needs to constantly reflect its state
+	ko.applyBindings(tweets = new Tweets());
+	
+	// Add a tweet
+	function addTweet(json){
+		  // We a push a tweet onto the list
+    	  tweets.list.push(json);
+    }
+    
+    // When connected set the status to true
+    function onConnect(event) {
+    	tweets.status(true);
+    }
+    
+    // When disconnected set the status to false
+    function onDisconnect(event) {
+    	tweets.status(false);
+    }
+    
+    // Connect to the firehose
+    function firehose(event) {
+    
+    	// We don't want the form to be posted
+    	event.preventDefault();
+    	
+    	// Extract credentials
+    	var username = $("form#login input[name='username']").val();
+    	var password = $("form#login input[name='password']").val();
+    	
+    	// Connect to the socket and extract a reference
+    	feedSocket = connect(username, password, onConnect, addTweet, onDisconnect);
+    }
+    
+    // If the user wants to disconnect, close the connection
+    function disconnect(){
+    	if(feedSocket != null) {
+    		feedSocket.close();
+    	}
+    }
+    
+    // On load function adjust the height/width property of a ap
+    $(function() {
+		var mapcontainer = $("#map-container");
+		$("#map-canvas").css("width",mapcontainer.width() + "px");
+		$("#map-canvas").css("height",mapcontainer.height() + "px");
+    });
+</script>
+</body>
+</html>
